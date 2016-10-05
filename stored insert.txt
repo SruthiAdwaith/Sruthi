@@ -1,0 +1,61 @@
+Delimiter $$
+CREATE PROCEDURE CSP_INSERTTT_Tbl_user_role(IN usernam varchar(50))
+BEGIN
+ INSERT into tbl_userr_role (username) values(usernam) ;
+END $$
+Delimiter ;
+
+Delimiter $$
+CREATE PROCEDURE CSP_INSERT_tbl_userr(IN usernam varchar(50),IN pswd varchar(24), IN role int )
+BEGIN
+ INSERT into tbl_userr (username,password,fk_role_id) values(usernam,pswd,role) ;
+END $$
+Delimiter ;
+
+Delimiter $$
+CREATE PROCEDURE CSP_INSERT_tbl_department(IN name varchar(50),IN active varchar(24))
+BEGIN
+ INSERT into tbl_department(department_name,department_active ) values(name,active) ;
+END $$
+Delimiter ;
+
+Delimiter $$
+CREATE PROCEDURE CSP_INSERTTT_tbl_student (IN id int,IN name varchar(50),IN dt date,IN dist varchar(20), IN place varchar(20), IN did int,IN active varchar(24))
+BEGIN
+ INSERT into tbl_student (fk_user_id,student_name,student_dob,student_district,student_place,fk_dept_id,student_status ) values(id,name,dt,dist,place,did,active) ;
+END $$
+Delimiter ;
+
+Delimiter $$
+CREATE PROCEDURE CSP_INSERTTT_tbl_teachers(IN id int,IN name varchar(50),IN dpid int,IN dt date,IN place varchar(20), 
+IN hid int,IN active varchar(24))
+BEGIN
+ INSERT into tbl_teachers (fk_user_id,teacher_name,fk_dept_id,teacher_dob,
+teacher_place,teacher_head_id,teacher_active) values(id,name,dpid,dt,place,hid,active) ;
+END $$
+Delimiter ;
+
+
+Delimiter $$
+CREATE PROCEDURE CSP_INSERTT_tbl_courses(IN des varchar(50),IN fee int,IN status varchar(24))
+BEGIN
+ INSERT into tbl_courses (course_description,course_fee,course_status) values(des,fee, status) ;
+END $$
+Delimiter ;
+
+Delimiter $$
+CREATE PROCEDURE CSP_INSERT_tbl_fee_payment_history(IN id int,IN fee int,IN dat date)
+BEGIN
+ INSERT into tbl_fee_payment_history (fk_student_id ,fph_amount,fph_date) values(id,fee, dat) ;
+END $$
+Delimiter ;
+
+Delimiter $$
+CREATE PROCEDURE CSP_INSERT_tbl_course_department(IN cid int,IN dpid int)
+BEGIN
+ INSERT into tbl_course_department (fk_course_id ,fk_dept_id) values(cid,dpid) ;
+END $$
+Delimiter ;
+
+
+

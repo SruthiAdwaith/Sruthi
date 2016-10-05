@@ -1,0 +1,82 @@
+1. create table Tbl_empoyee(Emp_id int primary key,Emp_name varchar(20),Emp_age int,int_salary int,vchr_palce varchar(20),Emp_email varchar(20));
+
+insert into  Tbl_empoyee(Emp_id, Emp_name,Emp_age,int_salary,vchr_palce,Emp_email) values(1000,'Deepak',24,10000, 'claicut', 'dk@gmail.com'),
+(1001,'Aneesh',23,20000,'cochin','an@gmail.com'),(1002,'naveen',25,10000,'calicut','nn@gmail.com'),(1003,'jacob',25,30000,'cochin','jc@gmail.com');
+
+Delimiter $$
+CREATE PROCEDURE csp_getsalary(IN id int)
+BEGIN 
+SELECT int_salary  from Tbl_empoyee where Emp_id=id ;
+END$$
+Delimiter;
+ 
+
+
+Delimiter $$
+CREATE PROCEDURE csp_gettsalary(IN id int,OUT sal int)
+BEGIN 
+SELECT int_salary into sal from Tbl_empoyee where Emp_id=id ;
+END$$
+Delimiter;
+$$
+
+ call csp_gettsalary(1000,@sal);
+  
+
+Delimiter $$
+CREATE PROCEDURE csp_gettSalaryAtPlace(IN place varchar(50),OUT total int)
+BEGIN
+ SELECT sum(int_salary) into total from Tbl_empoyee where vchr_palce=place ;
+END $$
+Delimiter ;
+$$
+  ------------------------------------------------------------------------------------------------
+
+
+create table tbl_userr_role (pk_user_id int primary key auto_increment,username varchar(25));
+
+create table tbl_user (pk_user_id int primary key auto_increment,username varchar(25), password varchar(25), fk_role_id int);
+create table tbl_userr (pk_user_id int primary key auto_increment,username varchar(25), password varchar(25), fk_role_id int, foreign 
+key(fk_role_id) references tbl_userr_role(pk_user_id));
+
+create table tbl_department (department_id int primary key auto_increment,department_name varchar(25), department_active varchar(10));
+
+create table tbl_student (pk_student_id int primary key auto_increment,fk_user_id int,student_name varchar(25),
+ student_dob date,student_district varchar(10),student_place varchar(25),fk_dept_id int,foreign key(fk_dept_id)
+ references tbl_department(department_id),student_status varchar(25) );
+
+create table tbl_teachers (pk_teacher_id int primary key auto_increment,fk_user_id int,teacher_name varchar(25),
+ fk_dept_id int,foreign key(fk_dept_id) references tbl_department(department_id),teacher_dob date,teacher_place varchar(25),
+teacher_head_id int, teacher_active varchar(25) );
+
+ create table tbl_courses(course_id int primary key auto_increment,course_description varchar(20), course_fee int,course_status varchar(20));
+
+create table tbl_fee_payment_history(fph_id int primary key auto_increment,fk_student_id int,foreign key(fk_student_id) references
+ tbl_student(pk_student_id), fph_amount int,fph_date date);
+
+
+create table tbl_course_department(pk_course_dept int primary key auto_increment,fk_course_id int,foreign key(fk_course_id) references 
+tbl_courses(course_id), fk_dept_id int,foreign key(fk_dept_id) references tbl_department(department_id));
+
+
+--------------------------------------------
+Delimiter $$
+CREATE PROCEDURE CSP_INSERTTT_Tbl_user_role(IN usernam varchar(50))
+BEGIN
+ INSERT into tbl_userr_role (username) values(usernam) ;
+END $$
+Delimiter ;
+
+Delimiter $$
+CREATE PROCEDURE CSP_INSERT_tbl_userr(IN usernam varchar(50),IN pswd varchar(24), IN role int )
+BEGIN
+ INSERT into tbl_userr (username,password,fk_role_id) values(usernam,pswd,role) ;
+END $$
+Delimiter ;
+
+Delimiter $$
+CREATE PROCEDURE CSP_INSERT_tbl_department(IN name varchar(50),IN active varchar(24))
+BEGIN
+ INSERT into tbl_department(department_name,department_active ) values(name,active) ;
+END $$
+Delimiter ;
