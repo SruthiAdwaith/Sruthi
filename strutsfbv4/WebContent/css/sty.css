@@ -1,0 +1,41 @@
+@CHARSET "ISO-8859-1";
+
+.navbar-nav > li{
+  margin-left:2px;
+  margin-right:2px;
+}
+#marginRow{
+   margin-bottom:0px ;
+   margin-top:0px ; 
+   position: relative;
+   top: -20px;
+   }
+   .img-responsive{
+        max-width: 100%;
+        height: auto;
+        box-shadow:none;
+    }
+
+.thumbnail{
+border: 0px;
+box-shadow: none;
+border-radius:0px;
+background-color: #f7f7f7;
+}
+
+#height{
+margin-left:6px;
+  margin-right:4px;
+  height:40px;
+  width:200px;
+  
+  
+
+}
+.green_btn  {
+    background: green;
+}
+
+#search {
+    width: 12em;  height: 3em;
+}
